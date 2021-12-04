@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::prefix('admin')->as('admin.')->middleware('auth')->group(function (){
+
+    Route::get('/dashboard',[IndexController::class,'dashboard'])->name('dashboard');
+//    custom_route('orders',OrderController::class);
+    custom_route('categories',CategoryController::class);
+    custom_route('users',UserController::class);
+//    custom_route('products',ProductController::class);
+//    custom_route('keys',IndexController::class);
+
+
 });
