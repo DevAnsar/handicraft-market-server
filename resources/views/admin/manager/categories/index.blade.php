@@ -64,7 +64,7 @@
                                             </td>
                                             <th>{{$key+1}}</th>
                                             <th>
-                                                @include('admin.layouts.img',['url'=>$category->icon['url']])
+                                                @include('admin.layouts.img',['url'=>$category->image])
                                             </th>
                                             <th>{{$category->title}}</th>
                                             <th>{{$category->slug}}</th>

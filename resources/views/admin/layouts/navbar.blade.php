@@ -44,7 +44,7 @@
 
                         <a class="dropdown-item" href="{{ url($route.'?trashed=true').$trash_param }}">
 
-                            <span>سطل زباله ({{ replace_number($count) }})</span>
+                            <span>سطل زباله ({{ replace_number_to_fa($count) }})</span>
                             <span class="fa fa-trash"></span>
                         </a>
                         <div class="dropdown-divider"></div>

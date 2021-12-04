@@ -25,7 +25,7 @@
                             @csrf
                             @method('patch')
                             <div class="row">
-                                @include('admin.data.users.fields')
+                                @include('admin.data.users.fields',['is_edit'=>$is_edit])
                             </div>
                         </form>
                     </div>

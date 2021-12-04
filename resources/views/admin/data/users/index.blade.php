@@ -66,11 +66,15 @@
                                     <th>#</th>
 
                                     <th>تصویر</th>
-                                    <th>نام</th>
+                                    <th>
+                                        نام
+                                    </th>
                                     <th>نام خ</th>
-                                    <th>موبایل</th>
-                                    <th>دسته / صنف</th>
-                                    {{--<th>مهارت های شغلی</th>--}}
+                                    <th>
+                                        موبایل
+
+                                    </th>
+                                    <th>ایمیل</th>
                                     <th>تنظیمات</th>
                                 </tr>
                                 </thead>
@@ -83,33 +87,22 @@
                                         </td>
                                         <th>{{$key+1}}</th>
                                         <th>
-                                            @include('admin.layouts.img',['url'=>$user->avatar['url']])
+                                            @include('admin.layouts.img',['url'=>$user->avatar])
                                         </th>
                                         <th>{{$user->name}}</th>
                                         <th>{{$user->family}}</th>
                                         <th>{{$user->mobile}}</th>
-                                        <th>
-                                            <one-to-many
-                                                    title=" دسته ی فعالیت کاربر {{$user->name}}  "
-                                                    :one="{{json_encode($user)}}"
-                                                    :one_many="{{json_encode($user->categories)}}"
-                                                    :many="{{json_encode($allCategories)}}"
-                                                    :submit_url="{{json_encode(route('admin.users.categories.sync',['user_id'=>$user->id]))}}"
-                                                    submit_title="ثبت دسته ها برای کاربر"
-                                            ></one-to-many>
-                                        </th>
-                                        {{--<th>--}}
-                                        {{--<button class="btn btn-sm ">--}}
-                                        {{--<one-to-many--}}
-                                        {{--title=" مهارت های شغلی کاربر {{$user->name}}  "--}}
-                                        {{--:one="{{json_encode($user)}}"--}}
-                                        {{--:one_many="{{json_encode($user->skills)}}"--}}
-                                        {{--:many="{{json_encode($allSkills)}}"--}}
-                                        {{--:submit_url="{{json_encode(route('admin.users.skills.sync',['user_id'=>$user->id]))}}"--}}
-                                        {{--submit_title="ذخیره مهارت ها"--}}
-                                        {{--></one-to-many>--}}
-                                        {{--</button>--}}
-                                        {{--</th>--}}
+                                        <th>{{$user->email}}</th>
+{{--                                        <th>--}}
+{{--                                            <user-category--}}
+{{--                                                    title=" دسته ی فعالیت کاربر {{$user->name}}  "--}}
+{{--                                                    :one="{{json_encode($user)}}"--}}
+{{--                                                    :one_many="{{json_encode($user->categories)}}"--}}
+{{--                                                    :many="{{json_encode($allCategories)}}"--}}
+{{--                                                    :submit_url="{{json_encode(route('admin.users.category.sync',['user_id'=>$user->id]))}}"--}}
+{{--                                                    submit_title="ثبت دسته ها برای کاربر"--}}
+{{--                                            ></user-category>--}}
+{{--                                        </th>--}}
                                         <th>
                                             @include('admin.data.users.actions',['user'=>$user])
                                         </th>

@@ -21,12 +21,22 @@ Route::get('/', function () {
 });
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function (){
 
-    Route::get('/dashboard',[IndexController::class,'dashboard'])->name('dashboard');
+    Route::get('/',[IndexController::class,'dashboard'])->name('dashboard');
 //    custom_route('orders',OrderController::class);
     custom_route('categories',CategoryController::class);
     custom_route('users',UserController::class);
+    Route::post('users/{user_id}/category/store',[UserController::class,'store_category'])->name('users.category.sync');
+
 //    custom_route('products',ProductController::class);
-//    custom_route('keys',IndexController::class);
+    custom_route('keys',IndexController::class);
 
 
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,8 +4,9 @@
 
         <div class="user-wid text-center py-4">
             <div class="user-img">
-                <img src="{{auth()->user()->avatar?asset(getImage(auth()->user()->avatar['url'])):asset('admin_styles/assets/images/users/avatar-2.jpg')}}"
-                     alt="" class="avatar-md mx-auto rounded-circle">
+                <img
+                    src="{{auth()->user()->avatar?asset(getImage(auth()->user()->avatar['url'])):asset('admin_styles/assets/images/users/avatar-2.jpg')}}"
+                    alt="" class="avatar-md mx-auto rounded-circle">
             </div>
 
             <div class="mt-3">
@@ -41,7 +42,7 @@
                         <span>سفارشات</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.questions.index')}}">لیست سفارشات</a></li>
+                        {{--                        <li><a href="{{route('admin.orders.index')}}">لیست سفارشات</a></li>--}}
 
                     </ul>
                 </li>
@@ -54,8 +55,8 @@
                         <span>محصولات</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.products.index')}}">لیست محصولات</a></li>
-                        <li><a href="{{route('admin.products.create')}}">ایجاد محصول جدید</a></li>
+                        {{--                        <li><a href="{{route('admin.products.index')}}">لیست محصولات</a></li>--}}
+                        {{--                        <li><a href="{{route('admin.products.create')}}">ایجاد محصول جدید</a></li>--}}
                     </ul>
                 </li>
 
@@ -68,9 +69,7 @@
                 </li>
 
 
-
-
-{{--                <li class="menu-title">مدیریت داده ها</li>--}}
+                {{--                <li class="menu-title">مدیریت داده ها</li>--}}
                 <li>
                     <a href="{{route('admin.categories.index')}}" class=" waves-effect">
                         <i class="mdi mdi-animation-outline"></i>

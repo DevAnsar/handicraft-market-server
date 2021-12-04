@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('label');
             $table->string('slug');
             $table->string('order_number')->nullable()->default(null);
+            $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

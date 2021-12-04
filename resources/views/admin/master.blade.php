@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>Biilche</title>
+    <title>دست سازه های طاهر | بخش مدیریت</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
     <meta content="Themesbrand" name="author"/>
@@ -28,8 +28,8 @@
     <link href="{{asset('admin_styles/assets/css/bootstrap-dark.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css"/>
     <link href="{{asset('admin_styles/assets/css/app-dark.min.css')}}" id="app-style" rel="stylesheet" type="text/css"/>
 
-    <link href="{{asset('admin_styles/admin_them.css')}}" id="app-style" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('css/admin.css')}}" rel="stylesheet" type="text/css"/>
+{{--    <link href="{{asset('admin_styles/admin_them.css')}}" id="app-style" rel="stylesheet" type="text/css"/>--}}
+    <link href="{{asset('css/admin_theme.css')}}" rel="stylesheet" type="text/css"/>
 
 
     @yield('css')
@@ -72,6 +72,7 @@
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
+
     <div class="message_div">
         <div class="message_box">
             <p id="msg"></p>
@@ -94,7 +95,7 @@
         {{--</div>--}}
     {{--</div>--}}
 </div>
-<script src="{{asset('js/adminVue.js')}}"></script>
+{{--<script src="{{asset('js/adminVue.js')}}"></script>--}}
 
 <!-- JAVASCRIPT -->
 <script src="{{asset('admin_styles/assets/libs/jquery/jquery.min.js')}}"></script>
@@ -107,7 +108,7 @@
 
 
 @yield('js')
-<script src="{{asset('js/admin.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
 
 {{--<script src="{{asset('js/socket.io.min.js')}}" ></script>--}}
 {{--<script src="{{asset('js/client.js')}}"></script>--}}

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
-//use App\Models\Search\UserSearch;
-//use App\Models\Skill;
+use App\Models\Search\UserSearch;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends MainController
 {
@@ -30,11 +29,34 @@ class UserController extends MainController
     public function index(Request $request)
     {
 
-//        $users_search=new UserSearch(0,1);
-//        $users=$users_search->getSearch($request,['avatar'],10);
-//        $trash_user_count = User::onlyTrashed()->count();
-//        $allCategories=Category::oldest()->select(['id','title'])->with(['icon'])->get();
-//        return view('admin.data.users.index', compact('users', 'request', 'trash_user_count','allCategories'));
+        $users_search=new UserSearch(0,6);
+        $users=$users_search->getSearch($request);
+        $trash_user_count = User::onlyTrashed()->count();
+        $allCategories=Category::oldest()->select(['id','title','slug','image'])->get();
+        return response()->view('admin.data.users.index', compact('users', 'request', 'trash_user_count','allCategories'));
+    }
+
+    public function store_category($user_id,Request $request){
+//        return $request->data;
+
+        try{
+            $category_id=$request->data;
+            $user=User::find($user_id);
+            if ($user){
+                $user->category=$category_id;
+                $user->save();
+            }
+            return response()->json([
+                'status'=>true,
+                'message'=>'دسته با موفق برای کاربر ثبت شد'
+            ]);
+        }catch (\Exception $exception){
+            return response()->json([
+                'status'=>false,
+                'message'=>$exception->getMessage()
+            ]);
+        }
+
     }
 
     /**
@@ -44,7 +66,7 @@ class UserController extends MainController
      */
     public function create()
     {
-        return view('admin.data.users.create');
+        return response()->view('admin.data.users.create');
     }
 
     /**
@@ -62,18 +84,19 @@ class UserController extends MainController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @return array
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|min:1',
-            'family' => 'required|min:1',
+            'family' => 'nullable',
             'username' => 'nullable',
             'national_code' => 'nullable',
             'mobile' => 'required',
+            'email' => 'nullable',
             'password' => 'required',
         ]);
 
@@ -81,11 +104,11 @@ class UserController extends MainController
 
             ////////////// initial user data
             $password=$request->input('password');
-            if ($password==null || $password==''){$password='biilche';}
+             if ($password==null || $password==''){$password='biilche';}
             $username=$request->input('username');
-            if (!$username){
+             if (!$username){
                 $username='u_'.generateRandomNumber(4);
-            }
+             }
             ///////////////
 
             $inputs = $request->all();
@@ -119,26 +142,26 @@ class UserController extends MainController
     public function edit(User $user)
     {
 
-        return view('admin.data.users.edit', compact('user'));
+        $is_edit=true;
+        return response()->view('admin.data.users.edit', compact('user','is_edit'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @param User $user
      * @return array
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(Request $request,User $user)
     {
         $this->validate($request, [
             'name' => 'required|min:1',
-            'family' => 'required|min:1',
+            'family' => 'nullable',
             'username' => 'nullable',
             'national_code' => 'nullable',
-            'mobile' => 'required',
-            'password' => 'nullable',
+            'mobile' => 'required'
         ]);
 
         try {
@@ -160,12 +183,13 @@ class UserController extends MainController
                 $res = uploadImage($request, "users/$user->id/avatar", 'avatar');
                 if ($res['status']) {
                     if ($user->avatar) {
-                        deleteImage($user->avatar['url']);
-                        $user->avatar()->update(['url' => $res['url'], 'name' => $res['name'], 'type' => 'avatar']);
+                        deleteImage($user->avatar);
+                        $user->avatar=$res['url'];
                         return $user->avatar;
                     } else {
-                        $user->avatar()->create(['url' => $res['url'], 'name' => $res['name'], 'type' => 'avatar']);
+                        $user->avatar=$res['url'];
                     }
+                    $user->save();
                 }
             }
 
@@ -174,59 +198,17 @@ class UserController extends MainController
                 if ($res['status']) {
                     if ($user->national_cart_image) {
                         deleteImage($user->national_cart_image['url']);
-                        $user->national_cart_image()->update(['url' => $res['url'], 'name' => $res['name']]);
+                        $user->national_cart_image=$res['url'];
                     } else {
-                        $user->national_cart_image()->create(['url' => $res['url'], 'name' => $res['name'], 'type' => 'national_cart_image']);
+                        $user->national_cart_image=$res['url'];
                     }
+                    $user->save();
                 }
             }
             return redirect(route('admin.users.index'));
 
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
-        }
-
-    }
-
-//    public function store_skills($user_id,Request $request){
-////        return $request->data;
-//
-//        try{
-//            $skills_id=array_filter(explode(',',$request->data));
-//            $user=User::find($user_id);
-//            if ($user){
-//                $user->skills()->sync($skills_id);
-//            }
-//            return response()->json([
-//                'status'=>true,
-//                'message'=>'مهارت با موفق برای دسته بندی ثبت شد'
-//            ]);
-//        }catch (\Exception $exception){
-//            return response()->json([
-//                'status'=>false,
-//                'message'=>$exception->getMessage()
-//            ]);
-//        }
-//
-//    }
-    public function store_categories($user_id,Request $request){
-//        return $request->data;
-
-        try{
-            $categories_id=array_filter(explode(',',$request->data));
-            $user=User::find($user_id);
-            if ($user){
-                $user->categories()->sync($categories_id);
-            }
-            return response()->json([
-                'status'=>true,
-                'message'=>'دسته با موفق برای کاربر ثبت شد'
-            ]);
-        }catch (\Exception $exception){
-            return response()->json([
-                'status'=>false,
-                'message'=>$exception->getMessage()
-            ]);
         }
 
     }

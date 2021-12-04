@@ -26,7 +26,7 @@ class CategoryController extends MainController
     public function index(Request $request)
     {
 
-        $categories = Category::getData($request->all(),['icon']);
+        $categories = Category::getData($request->all());
         $trash_category_count = Category::onlyTrashed()->count();
         return response()->view('admin.manager.categories.index',compact('categories', 'request', 'trash_category_count'));
     }
@@ -107,7 +107,7 @@ class CategoryController extends MainController
                 $res = uploadImage($request->file('image'), "/categories/$category->slug/image", 'image');
                 if ($res) {
                     if ($category->image) {deleteImage($category->image);}
-                    $category->image=$res;
+                    $category->image=$res['url'];
                     $category->save();
                 }
             }

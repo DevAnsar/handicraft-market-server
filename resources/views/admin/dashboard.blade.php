@@ -67,17 +67,17 @@
                     <div class="card-body">
                         <div class="media">
                             <div class="avatar-sm font-size-20 mr-3">
-                                <a href="{{route('admin.skills.index')}}">
+{{--                                <a href="{{route('admin.skills.index')}}">--}}
                                             <span class="avatar-title bg-soft-primary text-primary rounded">
                                                     <i class="mdi mdi-arm-flex-outline"></i>
                                                 </span>
-                                </a>
+{{--                                </a>--}}
                             </div>
                             <div class="media-body">
                                 <div class="font-size-16 mt-2">مهارت های شغلی</div>
                             </div>
                         </div>
-                        <h4 class="mt-4">{{number_format($skillsCount)}}</h4>
+{{--                        <h4 class="mt-4">{{number_format($skillsCount)}}</h4>--}}
                     </div>
                 </div>
             </div>
@@ -87,17 +87,17 @@
                     <div class="card-body">
                         <div class="media">
                             <div class="avatar-sm font-size-20 mr-3">
-                                <a href="{{route('admin.questions.index')}}">
+{{--                                <a href="{{route('admin.questions.index')}}">--}}
                                             <span class="avatar-title bg-soft-primary text-primary rounded">
                                                     <i class="mdi mdi-comment-text-multiple-outline"></i>
                                                 </span>
-                                </a>
+{{--                                </a>--}}
                             </div>
                             <div class="media-body">
                                 <div class="font-size-16 mt-2">کل سوالات</div>
                             </div>
                         </div>
-                        <h4 class="mt-4">{{number_format($questionsCount)}}</h4>
+{{--                        <h4 class="mt-4">{{number_format($questionsCount)}}</h4>--}}
                     </div>
                 </div>
             </div>
@@ -114,17 +114,17 @@
                     <div class="card-body">
                         <div class="media">
                             <div class="avatar-sm font-size-20 mr-3">
-                                <a href="{{route('admin.products.index')}}">
+{{--                                <a href="{{route('admin.products.index')}}">--}}
                                             <span class="avatar-title bg-soft-primary text-primary rounded">
                                                     <i class="mdi mdi-archive"></i>
                                             </span>
-                                </a>
+{{--                                </a>--}}
                             </div>
                             <div class="media-body">
                                 <div class="font-size-16 mt-2">محصولات و خدمات ثبت شده</div>
                             </div>
                         </div>
-                        <h4 class="mt-4">{{number_format($productsCount)}}</h4>
+{{--                        <h4 class="mt-4">{{number_format($productsCount)}}</h4>--}}
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
                                 <tbody>
                                 @foreach($lastUsers as $user)
                                     <tr>
-                                        <td>{{\Hekmatinasser\Verta\Verta::instance($user->created_at)->format('Y-m-d')}}</td>
+                                        <td>{{Verta::instance($user->created_at)->format('Y-m-d')}}</td>
                                         <td>
                                             <a href="#" class="text-body font-weight-medium">{{$user->username}}</a>
                                         </td>
