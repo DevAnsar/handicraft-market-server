@@ -39,7 +39,11 @@
                     <a href="javascript: void(0);" class="waves-effect has-arrow">
                         <i class="mdi mdi-comment-text-multiple-outline"></i>
 
-                        <span>سفارشات</span>
+                        <span>
+
+                            سفارشات
+                                        <span class="text-danger">*</span>
+                        </span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {{--                        <li><a href="{{route('admin.orders.index')}}">لیست سفارشات</a></li>--}}
@@ -55,8 +59,8 @@
                         <span>محصولات</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        {{--                        <li><a href="{{route('admin.products.index')}}">لیست محصولات</a></li>--}}
-                        {{--                        <li><a href="{{route('admin.products.create')}}">ایجاد محصول جدید</a></li>--}}
+                            <li><a href="{{route('admin.products.index')}}">لیست محصولات</a></li>
+                            <li><a href="{{route('admin.products.create')}}">ایجاد محصول جدید</a></li>
                     </ul>
                 </li>
 
@@ -80,12 +84,16 @@
                 <li>
                     <a href="{{route('admin.keys.index')}}" class=" waves-effect">
                         <i class="mdi mdi-animation-outline"></i>
-                        <span>کلید ها</span>
+                        <span>
+
+                            کلید ها
+                                    <span class="text-danger">*</span>
+                        </span>
                     </a>
                 </li>
 
             </ul>
         </div>
-        <!-- Sidebar -->
+
     </div>
 </div>

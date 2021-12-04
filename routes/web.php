@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,8 +27,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function (){
     custom_route('categories',CategoryController::class);
     custom_route('users',UserController::class);
     Route::post('users/{user_id}/category/store',[UserController::class,'store_category'])->name('users.category.sync');
-
-//    custom_route('products',ProductController::class);
+    custom_route('products',ProductController::class);
     custom_route('keys',IndexController::class);
 
 

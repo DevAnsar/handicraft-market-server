@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('likeCount')->default(0);
             $table->unsignedBigInteger('category_id')->default(0);
             $table->text('images')->nullable();
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

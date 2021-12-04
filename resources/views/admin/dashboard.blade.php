@@ -54,7 +54,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <div class="font-size-16 mt-2">دسته ها / اصناف</div>
+                                <div class="font-size-16 mt-2">دسته ها</div>
                             </div>
                         </div>
                         <h4 class="mt-4">{{number_format($categoriesCount)}}</h4>
@@ -67,17 +67,17 @@
                     <div class="card-body">
                         <div class="media">
                             <div class="avatar-sm font-size-20 mr-3">
-{{--                                <a href="{{route('admin.skills.index')}}">--}}
+                                <a href="{{route('admin.products.index')}}">
                                             <span class="avatar-title bg-soft-primary text-primary rounded">
                                                     <i class="mdi mdi-arm-flex-outline"></i>
                                                 </span>
-{{--                                </a>--}}
+                                </a>
                             </div>
                             <div class="media-body">
-                                <div class="font-size-16 mt-2">مهارت های شغلی</div>
+                                <div class="font-size-16 mt-2">محصولات</div>
                             </div>
                         </div>
-{{--                        <h4 class="mt-4">{{number_format($skillsCount)}}</h4>--}}
+                        <h4 class="mt-4">{{number_format($productsCount)}}</h4>
                     </div>
                 </div>
             </div>

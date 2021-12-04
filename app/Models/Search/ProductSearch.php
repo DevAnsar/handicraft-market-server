@@ -11,25 +11,22 @@ class ProductSearch
 {
     use HasFactory;
 
-    public $category=null;
+    public $category_id=0;
     public $products = [];
     public $string = '?';
     protected $paginate;
 
-    public function __construct(Category $category=null, $paginate = 10)
+    public function __construct($category_id=0, $paginate = 10)
     {
-        $this->category = $category;
+        $this->category_id = $category_id;
         $this->paginate = $paginate;
     }
 
     public function getSearch(Request $request, $with = [])
     {
-
-//        $skills=explode(',',$skills);
-//        $skills=array_filter($skills);
-
-        if ($this->category != null){
-            $products=$this->category->products()->orderBy('created_at','DESC');
+        if ($this->category_id != 0){
+            $category=Category::find($this->category_id);
+            $products=$category ? $category->products()->orderBy('created_at','DESC'):Product::query()->orderBy('created_at','DESC');
         }else{
             $products = Product::query()->orderBy('created_at','DESC');
 
@@ -46,13 +43,11 @@ class ProductSearch
             $searchValues = preg_split('/\s+/', $request['string']);
             $products->where(function ($q) use ($searchValues) {
                 foreach ($searchValues as $value) {
-                    $q->where('name', 'like', '%' . $value . '%')
-                        ->orWhere('family', 'like', '%' . $value . '%')
-                        ->orWhere('productname', 'like', '%' . $value . '%');
+                    $q->where('title', 'like', '%' . $value . '%')
+                        ->orWhere('slug', 'like', '%' . $value . '%')
+                        ->orWhere('description', 'like', '%' . $value . '%');
                 }
             });
-//            $products=$products->where('name','like','%'.$request['string'].'%');
-//            $products=$products->orWhere('family','like','%'.$request['string'].'%');
             $this->string=create_paginate_url($this->string,'string='.$request['string']);
         }
 
@@ -61,42 +56,9 @@ class ProductSearch
                 $products->with($item);
             }
         }
-
-//        if ($this->category_id != 0) {
-//            $products->whereHas('categories', function ($q) {
-//                $q->where('id', $this->category_id);
-//            });
-//        }
-//        if (sizeof($skills)>0){
-//            $products->whereHas('skills',function ($q) use ($skills){
-//                $q->whereIn('id',$skills);
-//            });
-//        }
-
-//        if ($string != null || $string != '') {
-//            $searchValues = preg_split('/\s+/', $string);
-//            $products->where(function ($q) use ($searchValues) {
-//                foreach ($searchValues as $value) {
-//                    $q->where('name', 'like', '%' . $value . '%')
-//                        ->orWhere('family', 'like', '%' . $value . '%')
-//                        ->orWhere('productname', 'like', '%' . $value . '%');
-//                }
-//            });
-//        }
-
-
-
         $products=$products->paginate($this->paginate);
         $products=$products->withPath($this->string);
         $this->products = $products;
-
-        return $products;
-    }
-
-    public function getResults()
-    {
-
-        $products=$this->products->paginate($this->paginate);
 
         return $products;
     }

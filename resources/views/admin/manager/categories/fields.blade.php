@@ -3,6 +3,7 @@
     <div class="form-group row ">
         <label class="col-3 control-label text-right">
             عنوان دسته بندی
+            <span class="text-danger">*</span>
         </label>
         <div class="col-9">
             <input name="title" type="text" value="{{isset($category)?$category->title:''}}" class="form-control "
@@ -13,6 +14,7 @@
     <div class="form-group row ">
         <label class="col-3 control-label text-right">
             عنوان به انگلیسی
+            <span class="text-danger">*</span>
         </label>
         <div class="col-9">
             <input name="label" type="text" value="{{isset($category)?$category->label:''}}" class="form-control "

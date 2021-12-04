@@ -80,24 +80,10 @@
             <a class="alert alert-danger" onclick="hide_box()">خیر</a>
         </div>
     </div>
-
-    {{--<div id="loading_box">--}}
-        {{--<div class="loading_div">--}}
-            {{--<div class="loading"></div>--}}
-            {{--<span>در حال ارسال اطلاعات</span>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
-    {{--<div class="server_error_box" id="server_error_box">--}}
-        {{--<div>--}}
-            {{--<span class="fa fa-warning"></span>--}}
-            {{--<span id="message">خطا در ارسال درخواست - مجددا تلاش نمایید</span>--}}
-        {{--</div>--}}
-    {{--</div>--}}
 </div>
-{{--<script src="{{asset('js/adminVue.js')}}"></script>--}}
+<script src="{{asset('js/app.js')}}"></script>
 
-<!-- JAVASCRIPT -->
+@yield('js')
 <script src="{{asset('admin_styles/assets/libs/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('admin_styles/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('admin_styles/assets/libs/metismenu/metisMenu.min.js')}}"></script>
@@ -107,11 +93,6 @@
 <script src="{{asset('admin_styles/assets/js/app.js')}}"></script>
 
 
-@yield('js')
-<script src="{{asset('js/app.js')}}"></script>
-
-{{--<script src="{{asset('js/socket.io.min.js')}}" ></script>--}}
-{{--<script src="{{asset('js/client.js')}}"></script>--}}
 </body>
 
 </html>
