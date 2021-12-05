@@ -17,6 +17,7 @@ class Category extends Model
         'label',
         'slug',
         'image',
+        'show_index',
         'order_number',
     ];
 
