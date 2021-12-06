@@ -16,6 +16,7 @@ class CategoriesCollection extends ResourceCollection
     {
         return $this->collection->map(function ($category){
             return [
+                'id'=>$category->id,
                 'title'=>$category->title,
                 'slug'=>$category->slug,
                 'image'=>$category->image

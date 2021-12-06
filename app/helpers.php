@@ -180,3 +180,12 @@ function showMobileRoles($user1,$user2){
 
     return true;
 }
+
+function JsonResponse($data,$status=true,$message=''){
+
+    return response()->json([
+        'status'=>$status,
+        'message'=>$message,
+        'data'=>$data
+    ]);
+}

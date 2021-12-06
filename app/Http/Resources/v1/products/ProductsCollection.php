@@ -3,20 +3,38 @@
 namespace App\Http\Resources\v1\products;
 
 use App\Http\Resources\v1\categories\CategoryResource;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductsCollection extends ResourceCollection
 {
+    private $useCategory=[];
+
+    /**
+     * Create a new resource instance.
+     *
+     * @param $resource
+     * @param bool $useCategory
+     */
+    public function __construct($resource,$useCategory=false)
+    {
+        $this->useCategory=$useCategory;
+        parent::__construct($resource);
+
+    }
+
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
+     * @return array|Arrayable
      */
     public function toArray($request)
     {
+
         return $this->collection->map(function ($product){
-            return[
+            $data=[
                 'id'=>$product->id,
                 'title'=>$product->title,
                 'slug'=>$product->slug,
@@ -26,8 +44,14 @@ class ProductsCollection extends ResourceCollection
                 'likeCount'=>number_format($product->likeCount),
                 'image'=>'',
                 'description'=>$product->description,
-                'category'=>new CategoryResource($product->category)
             ];
+
+            if ($this->useCategory){
+                $data=array_merge($data,[
+                    'category'=>new CategoryResource($product->category)
+                ]);
+            }
+            return $data;
         });
     }
 }
