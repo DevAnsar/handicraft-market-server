@@ -60,7 +60,7 @@ class CategoryController extends MainController
             $category = Category::create($inputs);
 
             if ($request->hasFile('image')) {
-                $image=uploadImage($request, "categories/$category->slug/image", 'image');
+                $image=uploadImage($request->file('image'), "categories/$category->slug/image", 'image');
                 $category->image=$image['url'];
                 $category->save();
             }

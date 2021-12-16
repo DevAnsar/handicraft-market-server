@@ -30,7 +30,8 @@ class Category extends Model
     {
         return [
             'slug' => [
-                'source' => 'label'
+                'source' => 'label',
+                'onUpdate'           => true,
             ]
         ];
     }
