@@ -54,18 +54,20 @@
 
 <div style="flex: 50%;max-width: 50%;padding: 0 20px;" class="column pt-4">
     <div class="form-group row m-1 p-2 border">
-        <label class="col-3 control-label text-right">
-            تصویر شاخص محصول
+        <label class="col-12 control-label text-right">
+            تصاویر محصول
         </label>
-        <div class="col-9 text-center">
-            <input name="image" type="file" class="form-control ">
-        </div>
+{{--        <div class="col-9 text-center">--}}
+{{--            <input name="image" type="file" class="form-control ">--}}
+{{--        </div>--}}
 
-        @if(isset($product) && $product->image)
-            <div class="col-12 text-center">
-                <img src="{{getImage($product->image['url'])}}" class="m-3" style="max-width: 50%">
-            </div>
-        @endif
+        <image-uploader images="{{isset($product)?$product->images()->select('id','url','main')->get():null}}" product_id="{{isset($product)?$product->id:0}}"></image-uploader>
+
+{{--        @if(isset($product) && $product->images)--}}
+{{--            <div class="col-12 text-center">--}}
+{{--                <img src="{{getImage($product->image['url'])}}" class="m-3" style="max-width: 50%">--}}
+{{--            </div>--}}
+{{--        @endif--}}
     </div>
 
 

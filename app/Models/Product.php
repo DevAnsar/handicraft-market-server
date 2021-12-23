@@ -16,7 +16,6 @@ class Product extends Model
         'slug',
         'description',
         'price',
-        'images',
         'category_id',
         'viewCount',
         'orderCount',
@@ -40,5 +39,10 @@ class Product extends Model
 
     public function category(){
         return $this->hasOne(Category::class,'id','category_id');
+    }
+
+
+    public function images(){
+        return $this->hasMany(ProductImages::class,'product_id','id');
     }
 }

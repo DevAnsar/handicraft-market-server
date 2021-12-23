@@ -25,5 +25,5 @@ Route::prefix('v1/app')->group(function () {
     Route::get('/index',[IndexController::class,'index']);
     Route::get('/categories',[CategoryController::class,'index']);
     Route::get('/products',[ProductController::class,'index']);
-    Route::get('/products/{product_id}',[ProductController::class,'get_product']);
+    Route::get('/products/{slug}',[ProductController::class,'get_product']);
 });

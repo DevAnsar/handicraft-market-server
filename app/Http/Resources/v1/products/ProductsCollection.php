@@ -3,6 +3,7 @@
 namespace App\Http\Resources\v1\products;
 
 use App\Http\Resources\v1\categories\CategoryResource;
+use App\Http\Resources\v1\images\ImageResource;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -42,7 +43,7 @@ class ProductsCollection extends ResourceCollection
                 'price_txt'=>number_format($product->price),
                 'viewCount'=>number_format($product->viewCount),
                 'likeCount'=>number_format($product->likeCount),
-                'image'=>'',
+                'image'=>new ImageResource($product->images()->where('main','=',true)->first()),
                 'description'=>$product->description,
             ];
 

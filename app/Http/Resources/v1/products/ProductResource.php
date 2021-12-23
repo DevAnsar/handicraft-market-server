@@ -3,6 +3,7 @@
 namespace App\Http\Resources\v1\products;
 
 use App\Http\Resources\v1\categories\CategoryResource;
+use App\Http\Resources\v1\images\ImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -38,7 +39,7 @@ class ProductResource extends JsonResource
             'price_txt'=>number_format($this->price),
             'viewCount'=>number_format($this->viewCount),
             'likeCount'=>number_format($this->likeCount),
-            'image'=>'',
+            'image'=>new ImageResource($this->images()->where('main',true)->first()),
             'description'=>$this->description,
         ];
 

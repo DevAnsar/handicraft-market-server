@@ -10,6 +10,11 @@ use App\Models\User;
 
 class IndexController extends Controller
 {
+
+    public function welcome(){
+
+        return view('welcome');
+    }
     public function dashboard(){
 
         $lastUsers=User::latest()->take(3)->get();

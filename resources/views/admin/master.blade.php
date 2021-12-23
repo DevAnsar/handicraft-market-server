@@ -82,6 +82,7 @@
     </div>
 </div>
 <script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/admin.js')}}"></script>
 
 @yield('js')
 <script src="{{asset('admin_styles/assets/libs/jquery/jquery.min.js')}}"></script>

@@ -31,25 +31,7 @@ function inTrashed($req)
 }
 
 function uploadImage($file,$path='',$name=''){
-//    if ($request->hasFile($name)) {
-//        if ($request->file($name)->isValid()) {
-//            $file_name= $request->file($name)->getClientOriginalName();
-//            $request->file($name)->storeAs($dir, $file_name,['disk'=>'public']);
-//            $url = $dir.'/'.$file_name;
-//            return [
-//                'status'=>true,
-//                'url'=>$url,
-//                'name'=>$file_name
-//            ];
-//        }
-//    }
-//    return [
-//        'status'=>false,
-//        'message'=>''
-//    ];
-
-    $year = Carbon::now()->year;
-    $filePath = "/images/{$year}" . $path;
+    $filePath = $path;
 
     $filename = $file->getClientOriginalName();
 

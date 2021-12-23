@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImages;
 use App\Models\Search\ProductSearch;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -29,7 +30,7 @@ class ProductController extends MainController
     {
 
         $products_query =new ProductSearch(0,10);
-        $products=$products_query->getSearch($request);
+        $products=$products_query->getSearch($request,['images']);
         $trash_product_count = Product::onlyTrashed()->count();
         return response()->view('admin.data.products.index',compact('products', 'request', 'trash_product_count'));
     }
@@ -86,6 +87,7 @@ class ProductController extends MainController
     public function edit(Product $product)
     {
         $categories=Category::all();
+//        return  $product->images;
         return response()->view('admin.data.products.edit', compact('product','categories'));
     }
 
@@ -124,4 +126,40 @@ class ProductController extends MainController
         }
     }
 
+    public function image_uploader($product_id,Request $request){
+
+        $product=Product::find($product_id);
+        $image= $request->file('product_image');
+        $path="/images/products/{$product_id}";
+        $url = uploadImage($image,$path);
+        $old_images=$product->images;
+        $image=$product->images()->create([
+            'main'=> sizeof($old_images) == 0,
+            'url'=>$url['url']
+        ]);
+
+        return \response()->json([
+            "id"=>$image->id,
+            "url"=>$url['url'],
+            "main"=>sizeof($old_images) == 0,
+        ]);
+    }
+    public function image_destroy($image_id,Request $request){
+
+        ProductImages::where('id','=',$image_id)->delete();
+
+        return \response()->json([
+            "message"=>true
+        ]);
+    }
+    public function image_main($product_id,$image_id,Request $request){
+
+        $product=Product::find($product_id);
+        $product->images()->update(['main'=>false]);
+        ProductImages::where('id','=',$image_id)->update(['main'=>true]);
+
+        return \response()->json([
+            "message"=>true
+        ]);
+    }
 }

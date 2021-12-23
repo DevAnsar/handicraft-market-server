@@ -42,9 +42,9 @@ class ProductController extends Controller
         try{
 
             $product=null;
-            $product_id=$request->product_id;
-            if ($product_id){
-                $product=Product::find($product_id);
+            $product_slug=$request->slug;
+            if ($product_slug){
+                $product=Product::whereSlug($product_slug)->first();
                 if ($product){
                     $message='محصول در دستان شماست';
                 }else{

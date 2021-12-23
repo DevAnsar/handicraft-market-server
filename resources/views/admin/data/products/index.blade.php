@@ -48,7 +48,7 @@
                                             #
                                         </th>
                                         <th>نام محصول</th>
-                                        <th>تصویر اصلی</th>
+                                        <th>تصویر</th>
                                         <th>دسته</th>
                                         <th>قیمت</th>
                                         <th>تنظیمات</th>
@@ -63,7 +63,8 @@
                                             </td>
                                             <th>{{$product->title}}</th>
                                             <th>
-                                                @include('admin.layouts.img',['url'=>$product->images ? $product->images['main']:null])
+
+{{--                                                @include('admin.layouts.img',['url'=>$product->images ? ($product->images()->where('main',true)->first()? $product->images()->where('main',true)->first()['url']:null ):null])--}}
                                             </th>
 
                                             <th>{{$product->category? $product->category->title: '-'}}</th>

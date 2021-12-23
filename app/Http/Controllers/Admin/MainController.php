@@ -75,6 +75,11 @@ class MainController extends Controller
         $row->restore();
         return redirect('admin/'.$this->route_params([$extra1]).'?trashed=true'.$query_string)->with('message',"بازیابی $this->title  با موفقیت انجام شد");
     }
+//    public function imageUploader($file,$path){
+//        $file_name=$file->getClientOriginalName();
+//        $file->move(public_path($path),$file_name);
+//        return $path .'/'. $file_name;
+//    }
 
 
 }

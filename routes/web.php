@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [IndexController::class,'welcome']);
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function (){
 
     Route::get('/',[IndexController::class,'dashboard'])->name('dashboard');
@@ -27,8 +25,14 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function (){
     custom_route('categories',CategoryController::class);
     custom_route('users',UserController::class);
     Route::post('users/{user_id}/category/store',[UserController::class,'store_category'])->name('users.category.sync');
+
     custom_route('products',ProductController::class);
+    Route::post('/products/{id}/image-upload',[ProductController::class,'image_uploader']);
+    Route::delete('/products/image-destroy/{image_id}',[ProductController::class,'image_destroy']);
+    Route::put('/products/{id}/image-main/{image_id}',[ProductController::class,'image_main']);
+
     custom_route('keys',IndexController::class);
+
 
 
 });
